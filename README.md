@@ -40,12 +40,18 @@ The model was implemented in **TensorFlow/Keras** and trained with transfer lear
 ---
 
 ## 📊 Results
-| Metric      | Value  |
-|-------------|--------|
-| Accuracy    | 84%    |
-| Precision   | 85%    |
-| Recall      | 84%    |
-| F1-score    | 84%    |
+              precision    recall  f1-score   support
+
+          H1       64%      79%      71%       437
+          H2       22%       5%       8%       233
+          H3       31%      50%      38%        82
+          H5       84%      61%      71%        80
+          H6       45%      77%      57%        70
+
+    accuracy                           56%       902
+   macro avg       49%      54%      49%       902
+weighted avg       50%      56%      50%       902
+
 
 *(Results may improve with more epochs and data augmentation)*
 
