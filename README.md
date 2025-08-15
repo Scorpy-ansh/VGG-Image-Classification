@@ -54,7 +54,7 @@ The model was implemented in **TensorFlow/Keras** and trained with transfer lear
 ## 📸 Grad-CAM Example
 Below is an example of how the model focuses on the important areas of the image:  
 
-![Grad-CAM Example](gradcam_results/example.png)
+![Grad-CAM Example](image.png)
 
 ---
 
