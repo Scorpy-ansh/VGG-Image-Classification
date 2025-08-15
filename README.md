@@ -6,14 +6,14 @@ We trained the model on a custom dataset to classify images into different categ
 The model was implemented in **TensorFlow/Keras** and trained with transfer learning to get better accuracy with fewer epochs.
 
 ---
-## 📂 Project Structure -
+## 📂 Project Structure
 
-├── dataset/ # Training & testing images
-├── vgg16_model.ipynb # Main Jupyter Notebook
-├── saved_model/ # Trained model files
-├── gradcam_results/ # Grad-CAM visualization images
-└── README.md # Project documentation
----
+- **dataset/** → Training & testing images  
+- **vgg16_model.ipynb** → Main Jupyter Notebook  
+- **saved_model/** → Trained model files  
+- **gradcam_results/** → Grad-CAM visualization images  
+- **README.md** → Project documentation  
+
 
 ## ⚙️ Steps Performed
 1. **Data Loading & Preprocessing**  
