@@ -1,73 +1,88 @@
-# VGG16 Image Classification Project
+🧫 Fungal Image Classification using VGG19 (Transfer Learning)
 
-## 📌 Overview
-This project uses the **VGG16** deep learning model for image classification.  
-We trained the model on a custom dataset to classify images into different categories.  
-The model was implemented in **TensorFlow/Keras** and trained with transfer learning to get better accuracy with fewer epochs.
+Deep learning–based fungal species recognition using transfer learning with VGG19, enhanced regularization, and robust evaluation metrics.
 
----
-## 📂 Project Structure
+📘 Overview
 
-- **dataset/** → Training & testing images  
-- **vgg16_model.ipynb** → Main Jupyter Notebook  
-- **saved_model/** → Trained model files  
-- **gradcam_results/** → Grad-CAM visualization images  
-- **README.md** → Project documentation  
+This project implements a Convolutional Neural Network (CNN) model based on VGG19 for classifying microscopic fungal images.
+It leverages transfer learning from ImageNet and introduces several improvements to boost generalization, stability, and interpretability.
 
+🧠 Model Architecture
 
-## ⚙️ Steps Performed
-1. **Data Loading & Preprocessing**  
-   - Loaded dataset images.
-   - Resized all images to **224x224** pixels.
-   - Normalized pixel values between 0 and 1.
+Backbone: Pre-trained VGG19 (include_top=False)
 
-2. **Model Setup (VGG16)**  
-   - Used pre-trained **VGG16** model from Keras with ImageNet weights.
-   - Removed the top classification layer and added custom layers for our dataset.
+Head:
 
-3. **Training**  
-   - Used **Adam optimizer**.
-   - Applied callbacks like **EarlyStopping** and **ModelCheckpoint**.
-   - Trained for **3 epochs**.
+GlobalAveragePooling2D
 
-4. **Evaluation**  
-   - Calculated accuracy and loss on the test set.
-   - Generated classification report (Precision, Recall, F1-score).
+Dropout
 
-5. **Visualization**  
-   - Used **Grad-CAM** to see which parts of the image the model focuses on.
+Dense(512, ReLU, L2 regularization)
 
----
+Dropout
 
-## 📊 Results
-              precision    recall  f1-score   support
+Dense(num_classes, Softmax)
 
-          H1       64%      79%      71%       437
-          H2       22%       5%       8%       233
-          H3       31%      50%      38%        82
-          H5       84%      61%      71%        80
-          H6       45%      77%      57%        70
+Regularization:
 
-    accuracy                           56%       902
-   macro avg       49%      54%      49%       902
-weighted avg       50%      56%      50%       902
+Dropout, L2 Weight Decay, and Label Smoothing (0.1)
 
+Optimizer: Adam (lr=1e-3 for head, 1e-5 during fine-tuning)
 
-*(Results may improve with more epochs and data augmentation)*
+Loss: Categorical Cross-Entropy (with label smoothing)
 
----
+📊 Dataset
 
-## 📸 Grad-CAM Example
-Below is an example of how the model focuses on the important areas of the image:  
+Source: Microscopic Fungi Image - DeFungi Dataset (Kaggle)
 
-![Grad-CAM Example](image.png)
+Classes (5):
 
----
+Candida albicans
 
-## 🛠️ Requirements
-- Python 3.x
-- TensorFlow / Keras
-- NumPy
-- Matplotlib
-- scikit-learn
-- OpenCV
+Aspergillus niger
+
+Trichophyton rubrum
+
+Trichophyton mentagrophytes
+
+Epidermophyton floccosum
+
+Preprocessing:
+
+Resize to 224×224
+
+Normalize pixel values [0,1]
+
+Data augmentation (rotation, flip, zoom)
+
+🚀 Training Configuration
+Parameter	Value
+Batch size	32
+Epochs	40
+Learning Rate	1e-3 → 1e-5 (fine-tuning)
+Optimizer	Adam
+Framework	TensorFlow / Keras
+Augmentation	In-model (GPU-accelerated)
+📈 Results
+Metric	Score
+Test Accuracy	70.29%
+Macro F1	70.67%
+ROC AUC	0.932
+
+Highlights:
+
+Overfitting reduced using GAP + Dropout + L2 + Label smoothing
+
+Stable validation curve post LR scheduling
+
+ROC and confusion matrix reveal class-specific weaknesses
+
+🔍 Visualizations
+
+📉 Training curves (Accuracy & Loss)
+
+📊 Confusion Matrix
+
+🧩 ROC Curves per class
+
+🔥 (Optional) Grad-CAM for interpretability
