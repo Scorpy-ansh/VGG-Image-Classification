@@ -1,88 +1,102 @@
-🧫 Fungal Image Classification using VGG19 (Transfer Learning)
+<h1 align="center">🧫 Fungal Image Classification using <span style="color:#4CAF50">VGG19</span> (Transfer Learning)</h1>
 
-Deep learning–based fungal species recognition using transfer learning with VGG19, enhanced regularization, and robust evaluation metrics.
+<p align="center">
+  <b>Deep Learning project for microscopic fungi recognition using Transfer Learning with VGG19</b><br>
+  <i>Built with TensorFlow · Keras · Python · Jupyter</i>
+</p>
 
-📘 Overview
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python" />
+  <img src="https://img.shields.io/badge/TensorFlow-2.x-orange?logo=tensorflow" />
+  <img src="https://img.shields.io/badge/Keras-DL%20Framework-red?logo=keras" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
-This project implements a Convolutional Neural Network (CNN) model based on VGG19 for classifying microscopic fungal images.
-It leverages transfer learning from ImageNet and introduces several improvements to boost generalization, stability, and interpretability.
+---
 
-🧠 Model Architecture
+## 🌟 Overview
 
-Backbone: Pre-trained VGG19 (include_top=False)
+A **transfer learning**–based approach using **VGG19** to classify microscopic images of fungal species.  
+The model leverages **ImageNet pretraining**, enhanced with **Dropout**, **L2 regularization**, and **label smoothing** for improved generalization and robustness.
 
-Head:
+---
 
-GlobalAveragePooling2D
+## 🧠 Model Architecture
 
-Dropout
+| Component | Description |
+|------------|-------------|
+| **Backbone** | Pre-trained `VGG19` (include_top=False) |
+| **Head** | GAP → Dropout → Dense(512, ReLU, L2) → Dropout → Dense(C, Softmax) |
+| **Regularization** | Dropout, L2 Weight Decay, Label Smoothing = 0.1 |
+| **Optimizer** | Adam (`1e-3` head, `1e-5` fine-tuning) |
+| **Loss** | Categorical Cross-Entropy (Label Smoothing) |
 
-Dense(512, ReLU, L2 regularization)
+🧩 *In-model augmentations (rotation, flip, zoom) are GPU-accelerated for efficient learning.*
 
-Dropout
+---
 
-Dense(num_classes, Softmax)
+## 🧬 Dataset
 
-Regularization:
+📦 **Source:** [Microscopic Fungi Image — DeFungi (Kaggle)](https://www.kaggle.com/)  
+🧪 **Classes (5):**
+1. *Candida albicans*  
+2. *Aspergillus niger*  
+3. *Trichophyton rubrum*  
+4. *Trichophyton mentagrophytes*  
+5. *Epidermophyton floccosum*  
 
-Dropout, L2 Weight Decay, and Label Smoothing (0.1)
+🧹 **Preprocessing:**
+- Resize → `224×224`
+- Normalize → `[0, 1]`
+- Augment → rotation, flipping, zooming
 
-Optimizer: Adam (lr=1e-3 for head, 1e-5 during fine-tuning)
+---
 
-Loss: Categorical Cross-Entropy (with label smoothing)
+## ⚙️ Training Configuration
 
-📊 Dataset
+| Parameter | Value |
+|------------|--------|
+| **Epochs** | 40 |
+| **Batch Size** | 32 |
+| **Learning Rate** | 1e-3 → 1e-5 (fine-tune) |
+| **Framework** | TensorFlow / Keras |
+| **Augmentation** | Random Flip / Rotation / Zoom |
 
-Source: Microscopic Fungi Image - DeFungi Dataset (Kaggle)
+---
 
-Classes (5):
+## 📈 Results
 
-Candida albicans
+| Metric | Score |
+|--------|--------|
+| ✅ **Accuracy** | **70.29%** |
+| 🎯 **Macro F1** | **70.67%** |
+| 💹 **ROC AUC** | **0.932** |
 
-Aspergillus niger
+🧩 *The addition of GAP + Dropout + L2 + Label Smoothing significantly reduced overfitting.*
 
-Trichophyton rubrum
+---
 
-Trichophyton mentagrophytes
+## 🔍 Visual Insights
 
-Epidermophyton floccosum
+<p align="center">
+  <img src="https://github.com/<your-username>/<repo-name>/assets/confusion_matrix.png" width="450" />
+  <img src="https://github.com/<your-username>/<repo-name>/assets/roc_curve.png" width="450" />
+</p>
 
-Preprocessing:
+✨ **Confusion Matrix** shows challenging class overlaps.  
+📉 **ROC Curves** illustrate robust separability for most classes.  
 
-Resize to 224×224
+---
 
-Normalize pixel values [0,1]
+## 🚀 Usage
 
-Data augmentation (rotation, flip, zoom)
+```bash
+# Clone the repository
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
 
-🚀 Training Configuration
-Parameter	Value
-Batch size	32
-Epochs	40
-Learning Rate	1e-3 → 1e-5 (fine-tuning)
-Optimizer	Adam
-Framework	TensorFlow / Keras
-Augmentation	In-model (GPU-accelerated)
-📈 Results
-Metric	Score
-Test Accuracy	70.29%
-Macro F1	70.67%
-ROC AUC	0.932
+# Install dependencies
+pip install -r requirements.txt
 
-Highlights:
-
-Overfitting reduced using GAP + Dropout + L2 + Label smoothing
-
-Stable validation curve post LR scheduling
-
-ROC and confusion matrix reveal class-specific weaknesses
-
-🔍 Visualizations
-
-📉 Training curves (Accuracy & Loss)
-
-📊 Confusion Matrix
-
-🧩 ROC Curves per class
-
-🔥 (Optional) Grad-CAM for interpretability
+# Run the notebook
+jupyter notebook vgg.ipynb
