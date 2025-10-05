@@ -79,8 +79,9 @@ The model leverages **ImageNet pretraining**, enhanced with **Dropout**, **L2 re
 ## 🔍 Visual Insights
 
 <p align="center">
-  <img src="https://github.com/<your-username>/<repo-name>/assets/confusion_matrix.png" width="450" />
-  <img src="https://github.com/<your-username>/<repo-name>/assets/roc_curve.png" width="450" />
+  <img src="train.png" />
+  <img src="ROC.png" />
+  <img src="confusion.png" />
 </p>
 
 ✨ **Confusion Matrix** shows challenging class overlaps.  
