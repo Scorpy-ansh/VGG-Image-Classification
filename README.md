@@ -79,7 +79,7 @@ The model leverages **ImageNet pretraining**, enhanced with **Dropout**, **L2 re
 ## 🔍 Visual Insights
 
 <p align="center">
-  <img src="train.png" />
+  <img src="Train.png" />
   <img src="ROC.png" />
   <img src="confusion.png" />
 </p>
